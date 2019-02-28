@@ -1,5 +1,5 @@
 #!/bin/sh
-for i in {1..100}
+for i in {1..2}
 do
 echo $i
 qsub -q workq <<END_OF_PBS
@@ -13,11 +13,10 @@ qsub -q workq <<END_OF_PBS
 #PBS -m ae
 #PBS -M pranav.s@theory.tifr.res.in
 # The following line specifies the name of the job
-#PBS -N cos_kmeans_$i
+#PBS -N cos_spec_$i
 cd \${PBS_O_WORKDIR}
 echo \${PBS_O_WORKDIR}
 #########################################################################
-mkdir predictions
 cd predictions
 echo \`hostname\` \`date\` >> ./output.txt
 /usr/bin/time -o time ../kmeans.py -N $i >> ./output.txt 2>./errors.txt
